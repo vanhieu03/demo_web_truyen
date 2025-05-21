@@ -1,0 +1,79 @@
+:root {
+    --bg-1: #1c1d22;
+    --bg-2: #111113;
+    --bg-divider: hsla(0, 0%, 100%, .12);
+    --bg-btn: #22242a;
+    --bg-nav: hsla(0,0%,100%,.7);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(220, 53, 69, 1);
+}
+
+.div2-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;   /* Số dòng muốn hiển thị */
+  line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.main-header,
+.main-content {
+    background-color: var(--bg-2);
+}
+
+.divider {
+    flex: 1;
+    height: 0;
+    border-bottom: 0.5px solid var(--bg-divider);
+}
+
+.slide-show {
+    overflow: hidden;
+}
+
+.slide {
+    flex-wrap: nowrap;
+    transition: 0.3s;
+}
+
+.img-slide {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+.img-comic{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.btn-pagi{
+    background-color: #22242a;
+}
+.btn-pagi.active{
+    background-color: red !important;
+}
+.main-footer{
+    background-color: var(--bg-1);
+}
+.footer{
+    max-width: 700px;
+}

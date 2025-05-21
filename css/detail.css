@@ -1,0 +1,66 @@
+.divider {
+    flex: 1;
+    height: 0;
+    border-bottom: 0.5px solid var(--bg-divider);
+}
+
+.main-detail {
+    background-color: var(--bg-2);
+}
+
+.start-chapter{
+    width: 85%;
+}
+
+.imgDiv {
+    min-width: 275px;
+    max-width: 295px;
+    width: 100%;
+}
+
+.imgDiv img {
+    object-fit: cover;
+}
+
+.v-icon-svg-small {
+    width: 12px;
+    height: 12px;
+    fill: #fff;
+}
+
+.comic-header,
+.comic-info {
+    background-color: var(--bg-1);
+}
+
+.v-icon-svg-med {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    fill: #f33;
+    outline: none;
+}
+
+.eye-icon {
+    height: 60px;
+    width: 50px;
+    background-color: #39252b;
+}
+
+.section_chapter:hover {
+    background-color: #4b4b4b5c !important;
+}
+
+.btn-loadAll{
+    border: 2px dashed gray;
+    height: 45px;
+    background-color: var(--bg-1);
+}
+
+.btn-loadAll:hover{
+    background-color: var(--bg-btn);
+}
+
+/* .btn-loadAll.active{
+    display: none;
+} */
