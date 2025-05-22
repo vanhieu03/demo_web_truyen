@@ -51,6 +51,7 @@
 .dialog-box.active {
     display: block;
 }
+
 .dialog-box {
     display: none;
 }
@@ -98,14 +99,24 @@
     background-color: var(--bg-nav);
 }
 
-.btn-chapter:hover{
-    background-color:rgba(220, 53, 69, 1);
+.btn-chapter:hover {
+    background-color: rgba(220, 53, 69, 1);
 }
 
-.btn-chapter.active-chapter{
-    background-color:rgba(220, 53, 69, 1);
+.btn-chapter.active-chapter {
+    background-color: rgba(220, 53, 69, 1);
 }
 
-.text-disabled{
-    color: hsla(0,0%,100%,.3) !important;
+.text-disabled {
+    color: hsla(0, 0%, 100%, .3) !important;
+}
+
+.pannel-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: top 0.3s ease;
+    background-color: #000;
+    z-index: 9999;
 }

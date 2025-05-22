@@ -104,12 +104,32 @@ let handleNav = (chapters) => {
     }).join('')
     dialog.innerHTML = htmls;
     // Xử lý khi cuộn chuột lên / xuống
-    window.addEventListener('wheel', (event) => {
-        if (event.deltaY > 0) {
-            console.log('Đang cuộn xuống');
-        } else if (event.deltaY < 0) {
-            console.log('Đang cuộn lên');
+
+    const topMovePannel = document.querySelector('.top-move-pannel');
+    const content = document.querySelector('.content');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const contentTopInViewport = content.getBoundingClientRect().top;
+        const isScrollingUp = window.scrollY < lastScrollY;
+        const isScrollingDown = window.scrollY > lastScrollY;
+
+        // Nếu content đã bị cuộn ra khỏi màn hình (lên trên) và đang cuộn lên
+        if (contentTopInViewport <= 0 && isScrollingUp) {
+            topMovePannel.classList.add('pannel-top');
         }
+
+        // Nếu đang ở trên đầu trang → ẩn đi
+        if (window.scrollY <= contentTopInViewport) {
+            topMovePannel.classList.remove('pannel-top');
+        }
+
+        // Nếu đang cuộn xuống thì ẩn panel
+        if (contentTopInViewport <= 0 && isScrollingDown) {
+            topMovePannel.classList.remove('pannel-top');
+        }
+
+        lastScrollY = window.scrollY;
     });
 }
 
@@ -120,11 +140,11 @@ let renderContent = (dataContent) => {
     const headerContent = document.querySelector('.header-content');
     // Render breadcrumb
     headerContent.innerHTML = `
-        <nav class="btn w-100 py-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 d-flex justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html" class="breadcrumb-list text-danger text-decoration-none">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="detail.html?slug=${slug}" class="breadcrumb-list text-danger text-decoration-none">${dataContent.data.item.comic_name}</a></li>
-                <li class="breadcrumb-item active text-danger breadcrumb-list" aria-current="page">Chương #${dataContent.data.item.chapter_name}</li>
+        <nav class="btn w-100" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 d-flex justify-content-center align-items-center">
+                <li class="breadcrumb-item"><a href="index.html" class="breadcrumb-list text-danger text-decoration-none small">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="detail.html?slug=${slug}" class="breadcrumb-list text-danger text-decoration-none small">${dataContent.data.item.comic_name}</a></li>
+                <li class="breadcrumb-item active text-danger breadcrumb-list small" aria-current="page">Chương #${dataContent.data.item.chapter_name}</li>
             </ol>
         </nav>
     `;
