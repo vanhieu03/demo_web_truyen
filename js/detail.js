@@ -3,6 +3,7 @@ let slug = params.get('slug');
 const apiDetail = `https://otruyenapi.com/v1/api/truyen-tranh/${slug}`;
 // Hàm chia chuỗi url với mỗi dấu / để lấy id 
 let getId = (link) => {
+    if (!link || typeof link !== 'string') return '';
     const parts = link.split('/');
     return parts[parts.length - 1];
 };
@@ -23,7 +24,7 @@ if (slug) {
 }
 
 // render chapter
-let renderChapter = (array) =>{
+let renderChapter = (array) => {
     //Hiển thị chapter
     let htmls = '';
     array.forEach((chap) => {
@@ -47,7 +48,8 @@ let renderChapter = (array) =>{
     return htmls;
 }
 // Hàm load chap theo số lượng
-let loadChap = (quantity, allChapter) =>{
+let loadChap = (quantity, allChapter) => {
+    if (!allChapter || typeof allChapter !== 'object') return '';
     let chaptersToShow = allChapter.slice(0, quantity);
     return renderChapter(chaptersToShow);
 }
@@ -65,14 +67,14 @@ let handleDetail = (dataDetail => {
         <h4 class="text-white pt-2">${dataDetail.data.item.name}</h4>
         <div class="py-2">
             ${dataDetail.data.item.category.map(cate =>
-                    `<a href = "" class="btn badge rounded-pill text-bg-secondary fw-normal me-2">
+        `<a href = "" class="btn badge rounded-pill text-bg-secondary fw-normal me-2">
                         <svg viewBox="0 0 24 24" class="v-icon-svg-small">
                             <path d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z"></path>
                         </svg>
                         ${cate.name}
                     </a>`
-                ).join('')
-            }
+    ).join('')
+        }
         </div>
         <div class="py-2 text-white">
             ${dataDetail.data.seoOnPage.descriptionHead}
@@ -110,29 +112,38 @@ let handleDetail = (dataDetail => {
             </div>
         </div>
     `;
-    
+    let linkchap = dataDetail.data.item.chapters;
     // Hiển thị ảnh
     imgDiv.innerHTML = `<img src="${imgDetail}" alt="anh_loi" class="rounded w-100"></img>`
     startChapter.innerHTML = `
-            <a href="content.html?api=${getId(dataDetail.data.item.chapters[0].server_data[0].chapter_api_data)}"
+            <a href="content.html?api=${getId(linkchap?.[0]?.server_data?.[0]?.chapter_api_data)}"
                 class="btn text-white py-2 w-100 btn-sm" style="background-color: var(--bg-btn);">
                 Đọc từ đầu
             </a>
         `;
     // gọi hàm loadChap() để load chap theo số lượng nhất định
-    chapter.innerHTML = loadChap(21, dataDetail.data.item.chapters[0].server_data);
+    chapter.innerHTML = loadChap(21, linkchap?.[0]?.server_data);
     const btnLoadAll = document.querySelector('.btn-loadAll');
-    btnLoadAll.addEventListener('click', () =>{
+    // Hàm xử lý sự kiện click vào nút "Xem tất cả"
+    const handleClick = () => {
         chapter.innerHTML = "";
-        
         btnLoadAll.classList.toggle('active');
-        if(btnLoadAll.classList.contains('active')){
-            chapter.innerHTML = renderChapter(dataDetail.data.item.chapters[0].server_data);
+        if (btnLoadAll.classList.contains('active')) {
+            chapter.innerHTML = renderChapter(linkchap[0]?.server_data);
             btnLoadAll.innerText = 'THU GỌN';
         }
-        else{
-            chapter.innerHTML = loadChap(21, dataDetail.data.item.chapters[0].server_data);
+        else {
+            chapter.innerHTML = loadChap(21, linkchap[0]?.server_data);
             btnLoadAll.innerText = 'HIỂN THỊ TẤT CẢ';
         }
-    })
+    }
+
+    btnLoadAll.addEventListener('click', handleClick);
+    // Hủy  nút "Xem tất cả" nếu không có chương nào
+    if (linkchap.length == 0) {
+        btnLoadAll.innerText = 'Đang cập nhật các chương';
+        btnLoadAll.removeEventListener('click', handleClick);
+    }else if(linkchap[0]?.server_data.length == 21){
+        btnLoadAll.classList.add('d-none');
+    }
 });
