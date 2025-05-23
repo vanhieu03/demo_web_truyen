@@ -16,17 +16,18 @@
         <div class="container">
             <div class="row py-2 align-items-center">
                 <div class="col-md-6 d-flex">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30px"
-                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                            <path fill="#ffffff"
-                                d="M96 0C43 0 0 43 0 96L0 416c0 53 43 96 96 96l288 0 32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L384 0 96 0zm0 384l256 0 0 64L96 448c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16zm16 48l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
-                        </svg>
-                    </div>
-                    <div class="ps-2">
-                        <a href="index.html" class="btn text-white">TRANG CHỦ</a>
-                        <a href="" class="btn text-white">DANH SÁCH</a>
-                        <a href="" class="btn text-white">LIÊN HỆ</a>
+                    <a href="index.html">
+                        <img src="https://goctruyentranhvui17.com/contents/images/logo.png" alt="logo" width="120px"
+                            height="45px">
+                    </a>
+                    <div class="d-flex align-items-center ps-2">
+                        <a href="index.html"
+                            class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">TRANG
+                            CHỦ</a>
+                        <a href="list.html" class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">DANH
+                            SÁCH</a>
+                        <a href="contact.html" class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">LIÊN
+                            HỆ</a>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
@@ -75,12 +76,13 @@
                         </div>
                         <div class="row chapter my-3 mx-2"> </div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn-loadAll rounded text-white fw-medium w-100" style="letter-spacing: .0892857143em;">
+                            <button class="btn-loadAll rounded text-white fw-medium w-100"
+                                style="letter-spacing: .0892857143em;">
                                 HIỂN THỊ TẤT CẢ
                             </button>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -98,7 +100,7 @@
                             class="text-decoration-none text-white">goctruyentranh24h@gmail.com</a>
                     </div>
                 </div>
-                <a class="col-md-6"  href="https://www.facebook.com/goctruyentranh24h/?ref=embed_page" target="_blank">
+                <a class="col-md-6" href="https://www.facebook.com/goctruyentranh24h/?ref=embed_page" target="_blank">
                     <div class="d-inline-flex bg-light p-2">
                         <div class="m-2">
                             <img src="https://scontent.fhan2-5.fna.fbcdn.net/v/t39.30808-1/278246634_351044933708661_1357101858945036765_n.jpg?stp=cp0_dst-jpg_s50x50_tt6&_nc_cat=1&ccb=1-7&_nc_sid=f907e8&_nc_ohc=XHjZKbfYMboQ7kNvwFIk7wu&_nc_oc=AdkP2o0Ya4wrv8uBD0COxUjC4FB1tJ83hABqXWZNLFPd2jx8kzC7OlnLVCRx8YwsO54&_nc_zt=24&_nc_ht=scontent.fhan2-5.fna&_nc_gid=e_ORlJ5uMZryrojEe_x86g&oh=00_AfIPEGqZEbWt75RsLi9HJx0Crs7-Z78RxVqIQI-7N9LCYA&oe=6831DCDF"
@@ -121,6 +123,18 @@
             </div>
         </div>
     </footer>
+    <script>
+        const links = document.querySelectorAll('.btn-default');
+
+        links.forEach((link, index) => {
+            // Lấy pathname của link (vd: "index.html")
+            const linkPath = link.getAttribute('href');
+            // So sánh với pathname hiện tại
+            if (window.location.href.endsWith(linkPath)) {
+                link.classList.add('nav-active');
+            }
+        });
+    </script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/detail.js"></script>
 </body>

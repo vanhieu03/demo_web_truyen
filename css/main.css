@@ -11,6 +11,37 @@
     width: 10px;
 }
 
+.btn-default {
+    position: relative;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-default:hover ,
+.btn-default:active {
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: rgba(255, 255, 255, .1) !important;
+    border: none !important;
+}
+
+.btn-default.nav-active{
+    pointer-events: none;
+    color: #fff;
+}
+
+.btn-default.nav-active::before{
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 2px;
+    border-radius: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background-color: #fff;
+}
+
+
 /* Track */
 ::-webkit-scrollbar-track {
     background: black;
