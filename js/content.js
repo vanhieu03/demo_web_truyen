@@ -78,6 +78,11 @@ let handleNav = (chapters) => {
     const navList = document.querySelector('.nav-list');
     const dialog = document.querySelector('.dialog');
     const dialogBox = document.querySelector('.dialog-box');
+    const dialogList = document.querySelector('.dialog-list');
+    //Kiểm soát sự kiện click
+    dialogList.addEventListener('mousedown', e =>{
+        e.stopPropagation();
+    })
     //Xử lý phần hiển thị khi ấn vào chương
     navList.addEventListener('click', () => {
         dialogBox.classList.toggle('active');
@@ -86,10 +91,9 @@ let handleNav = (chapters) => {
         btnClose.addEventListener('click', (e) => {
             document.body.style.overflowY = 'visible';
             dialogBox.classList.remove('active');
-            e.stopPropagation();
         })
     })
-    dialogBox.addEventListener('click', () => {
+    dialogBox.addEventListener('mousedown', () => {
         dialogBox.classList.toggle('active');
         document.body.style.overflowY = 'visible';
     })

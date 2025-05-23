@@ -68,9 +68,9 @@ let render = (current) => {
                         <div class="comic-des">
                             <div class="fs-6 my-2 div2-lines" style="color: #ffffffc9">${item.name}</div>
                             ${item.category.map(car => {
-                                return `<div class="badge rounded-pill bg-primary">${car.name}</div>`
-                            }).join('')
-                            }
+                return `<div class="badge rounded-pill bg-primary">${car.name}</div>`
+            }).join('')
+                }
                         </div>
                     </a>
                 </div>
@@ -175,6 +175,71 @@ renderHome(apiHome, (dataPagi) => {
 
     const range = getPaginationRange(currentPage, totalPages, pageRanges);
     handleRenderPagi(range, totalPages, pageRanges);
+
+})
+// Xử lý phần tìm kiếm ở trang home
+const navSearch = document.querySelector('.nav-search');//nút tìm kiếm
+const dialogHome = document.querySelector('.dialog-home');//Khối hiện lên khi ấn vào nút tìm kiếm
+const btnExit = document.querySelector('.btn-exit');//Nút thoát khối tìm kiếm
+const dialogContainer = document.querySelector('.dialog-container');//Khối bao quanh khối tìm kiếm
+//Khi ấn vào icon tìm kiếm thì hiện khối tìm kiếm
+navSearch.addEventListener('click', () => {
+    dialogHome.classList.add('active');
+    document.body.style.overflowY = 'hidden';
+    //Đóng khối tìm kiếm cho icon "X"
+    btnExit.addEventListener('click', () => {
+        dialogHome.classList.remove('active');
+        document.body.style.overflowY = 'visible';
+        clearInterval(id);
+    })
+    // Đóng khối tìm kiếm khi ấn phần bao quanh khối tìm kiếm
+    dialogHome.addEventListener('mousedown', () => {
+        dialogHome.classList.remove('active');
+        document.body.style.overflowY = 'visible';
+        clearInterval(id);
+    })
+    // Ngăn chặn sự nổi bọt
+    dialogContainer.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+    })
+    // Hàm trả về kết quả tìm kiếm
+    let searchResult = (dataSearch) => {
+        let htmls = '';
+        htmls = dataSearch.data.items.map(item => {
+            return `
+                    <div>
+                        <a href="detail.html?slug=${item.slug}" class="image_search">
+                            <img src="https://img.otruyenapi.com/uploads/comics/${item.thumb_url}" alt="">
+                        </a>
+                    </div>
+                `
+        }).join('');
+        return htmls;
+    }
+
+    // Lấy giữ liệu nhập từ người dùng ở ô tìm kiếm
+    const searchDialog = document.querySelector('.search-dialog');// ô tìm kiếm
+    // Biến keyword
+    let key = '';
+    //Hàm lấy dữ liệu ô tìm kiếm
+    const handleSearch = (e) => {
+        key = e.target.value;
+    }
+    searchDialog.addEventListener('input', handleSearch);
+    // Phần hiển thị kết quả tìm kiếm
+    const dialogBody = document.querySelector('.dialog-body');
+    //Hàm gọi api để lấy dữ liệu
+    const callSearchApi = () => {
+        const apiSearch = `https://otruyenapi.com/v1/api/tim-kiem?keyword=${key}`;
+        renderHome(apiSearch, (dataSearch) => {
+            dialogBody.innerHTML = searchResult(dataSearch);// Hàm trả về kết quả tìm kiếm 
+        })
+    }
+    callSearchApi();
+    //Gọi api mỗi 3 giây để lấy dữ liệu
+    let id = setInterval(() => {
+        callSearchApi();
+    }, 3000)
 
 })
 

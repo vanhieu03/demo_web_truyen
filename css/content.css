@@ -78,18 +78,6 @@
     fill: #fff;
 }
 
-.search-dialog {
-    background-color: #1e1e1e;
-    border: none;
-    color: #fff !important;
-    margin: 8px 8px 10px 20px;
-    border-bottom: 1px solid hsla(0, 0%, 100%, .3);
-}
-
-.search-dialog::placeholder {
-    color: #fff;
-}
-
 .btn-close {
     height: 36px;
     width: 36px;

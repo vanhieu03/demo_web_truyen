@@ -11,6 +11,24 @@
 </head>
 
 <body>
+    <!-- Phần tìm kiếm chap trong content -->
+    <div class="dialog-box">
+        <div class="dialog-list rounded">
+            <div class="dialog-header">
+                <div class="dialog-body input-group align-items-center">
+                    <input type="text" placeholder="Search" class="search-dialog py-3">
+                    <div class="btn-close btn btn-sm d-flex justify-content-center align-items-center">
+                        <svg viewBox="0 0 24 24" class="v-icon-svg v-icon-svg-dialog">
+                            <path
+                                d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog d-flex flex-wrap justify-content-center px-2"></div>
+        </div>
+    </div>
     <!-- nav -->
     <div style="background-color: var(--bg-1);">
         <div class="container">
@@ -119,23 +137,6 @@
             </div>
         </div>
     </footer>
-    <div class="dialog-box">
-        <div class="dialog-list rounded">
-            <div class="dialog-header">
-                <div class="input-group align-items-center">
-                    <input type="text" placeholder="Search" class="search-dialog px-3 py-2 flex-fill">
-                    <div class="btn-close btn btn-sm d-flex justify-content-center align-items-center">
-                        <svg viewBox="0 0 24 24" class="v-icon-svg v-icon-svg-dialog">
-                            <path
-                                d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="dialog d-flex flex-wrap justify-content-center px-2"></div>
-        </div>
-    </div>
     <script>
         const links = document.querySelectorAll('.btn-default');
 

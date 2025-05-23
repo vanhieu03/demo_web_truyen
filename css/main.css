@@ -17,19 +17,19 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.btn-default:hover ,
+.btn-default:hover,
 .btn-default:active {
     color: rgba(255, 255, 255, 1) !important;
     background-color: rgba(255, 255, 255, .1) !important;
     border: none !important;
 }
 
-.btn-default.nav-active{
+.btn-default.nav-active {
     pointer-events: none;
     color: #fff;
 }
 
-.btn-default.nav-active::before{
+.btn-default.nav-active::before {
     content: '';
     position: absolute;
     width: 30%;
@@ -41,6 +41,80 @@
     background-color: #fff;
 }
 
+.nav-search:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: rgba(255, 255, 255, .1) !important;
+    border: none !important;
+}
+
+.dialog-home {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(33 33 33 / 46%);
+    z-index: 999;
+}
+
+.dialog-home.active {
+    display: block;
+}
+
+.dialog-home {
+    display: none;
+}
+
+.dialog-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    max-width: 300px;
+    background-color: #1e1e1e;
+    border-color: #1e1e1e;
+    box-shadow: 1px 1px 20px 1px grey !important;
+}
+
+.dialog-header {
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.dialog-body {
+    max-height: 285px;
+    overflow-y: auto;
+}
+
+.v-icon-svg-dialog {
+    height: 24px;
+    width: 24px;
+    fill: #fff;
+}
+
+.search-dialog {
+    flex: 1 1 auto;
+    letter-spacing: normal;
+    color: #fff;
+    background: transparent;
+    border: none;
+    margin: 8px 8px 10px 20px;
+    outline: none;
+    border-bottom: 1px solid hsla(0, 0%, 100%, .3);
+    font-size: 16px;
+    font-weight: 400;
+    padding-left: 8px;
+    height: 25px;
+}
+
+.search-dialog::placeholder {
+    color: #fff;
+}
+
+.v-icon-svg-dialog:hover {
+    fill: red;
+}
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -127,4 +201,9 @@
 
 .paging-first.disabled {
     display: none;
+}
+
+.image_search img {
+    width: 60px;
+    height: 90px;
 }
