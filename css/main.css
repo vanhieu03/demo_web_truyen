@@ -83,6 +83,7 @@
 }
 
 .dialog-body {
+    overflow-x: hidden;
     max-height: 285px;
     overflow-y: auto;
 }
@@ -132,6 +133,7 @@
 }
 
 .div2-lines {
+    height: 48px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -206,4 +208,17 @@
 .image_search img {
     width: 60px;
     height: 90px;
+}
+
+.item:hover {
+    box-shadow: 1px 0px 5px 1px #adb6bb;
+    border-radius: 5px;
+}
+
+.info .name {
+    color: #81818e;
+}
+
+.info .chapter {
+    color: #c0c0c0;
 }
