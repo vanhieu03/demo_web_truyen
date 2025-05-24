@@ -2,11 +2,23 @@ const params = new URLSearchParams(window.location.search);
 let slug = params.get('slug');
 const apiDetail = `https://otruyenapi.com/v1/api/truyen-tranh/${slug}`;
 // Hàm chia chuỗi url với mỗi dấu / để lấy id 
-let getId = (link) => {
+let getIdDetail = (link) => {
     if (!link || typeof link !== 'string') return '';
     const parts = link.split('/');
     return parts[parts.length - 1];
 };
+let renderHome = (api, handleData) => {
+    fetch(api)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            handleData(data);
+        })
+        .catch(error => {
+            console.log(`Lỗi: ${error}`)
+        })
+}
 // Kiểm tra slug để tránh lỗi khi không có tham số slug
 if (slug) {
     fetch(apiDetail)
@@ -30,7 +42,7 @@ let renderChapter = (array) => {
     array.forEach((chap) => {
         htmls += `
                 <div class="chapter-item col-4 p-2">
-                    <a href="content.html?api=${getId(chap.chapter_api_data)}&slug=${slug}"
+                    <a href="content.html?api=${getIdDetail(chap.chapter_api_data)}&slug=${slug}"
                         class="section_chapter btn btn-sm text-white w-100" style="background-color: var(--bg-btn)">
                         <div class="d-flex align-items-center">
                             <div class="me-3 eye-icon d-flex align-items-center justify-content-center rounded">
@@ -116,7 +128,7 @@ let handleDetail = (dataDetail => {
     // Hiển thị ảnh
     imgDiv.innerHTML = `<img src="${imgDetail}" alt="anh_loi" class="rounded w-100"></img>`
     startChapter.innerHTML = `
-            <a href="content.html?api=${getId(linkchap?.[0]?.server_data?.[0]?.chapter_api_data)}"
+            <a href="content.html?api=${getIdDetail(linkchap?.[0]?.server_data?.[0]?.chapter_api_data)}"
                 class="btn text-white py-2 w-100 btn-sm" style="background-color: var(--bg-btn);">
                 Đọc từ đầu
             </a>
@@ -147,3 +159,98 @@ let handleDetail = (dataDetail => {
         btnLoadAll.classList.add('d-none');
     }
 });
+// Xử lý phần tìm kiếm ở trang home
+const navSearch = document.querySelector('.nav-search');//nút tìm kiếm
+const dialogHome = document.querySelector('.dialog-home');//Khối hiện lên khi ấn vào nút tìm kiếm
+const btnExit = document.querySelector('.btn-exit');//Nút thoát khối tìm kiếm
+const dialogContainer = document.querySelector('.dialog-container');//Khối bao quanh khối tìm kiếm
+//Khi ấn vào icon tìm kiếm thì hiện khối tìm kiếm
+navSearch.addEventListener('click', () => {
+    dialogHome.classList.add('active');
+    document.body.style.overflowY = 'hidden';
+    //Đóng khối tìm kiếm cho icon "X"
+    btnExit.addEventListener('click', () => {
+        dialogHome.classList.remove('active');
+        document.body.style.overflowY = 'visible';
+    })
+    // Đóng khối tìm kiếm khi ấn phần bao quanh khối tìm kiếm
+    dialogHome.addEventListener('mousedown', () => {
+        dialogHome.classList.remove('active');
+        document.body.style.overflowY = 'visible';
+    })
+    // Ngăn chặn sự nổi bọt
+    dialogContainer.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+    })
+    // Hàm trả về kết quả tìm kiếm
+    let searchResult = (dataSearch) => {
+        let htmls = '';
+        htmls = dataSearch.data.items.map(item => {
+            // nếu tồn tại item.chaptersLatest thì tạo ra url
+            const urlLastChapter =
+                item.chaptersLatest
+                    ? `content.html?api=${getIdDetail(item?.chaptersLatest?.[0]?.chapter_api_data || '')}&slug=${item.slug}`
+                    : '';
+            return `
+                    <div class="item row p-0 m-1">
+                        <div class="col-3 p-1">
+                            <a href="detail.html?slug=${item.slug}" class="image_search">
+                                <img src="https://img.otruyenapi.com/uploads/comics/${item.thumb_url}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-9">
+                            <div class="info d-flex flex-column justify-content-between" style="height: 95px;">
+                                <a href="detail.html?slug=${item.slug}" class="flex-grow-1 text-decoration-none">
+                                    <span class="div2-lines name">${item.name}</span>
+                                </a>
+                                <a href="${urlLastChapter}" data-url="${urlLastChapter}" class="chapter text-decoration-none">Chương ${item?.chaptersLatest?.[0]?.chapter_name || ': Đang cập nhật'}</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+        }).join('');
+
+        return htmls;
+    }
+
+    // Lấy giữ liệu nhập từ người dùng ở ô tìm kiếm
+    const searchDialog = document.querySelector('.search-dialog');// ô tìm kiếm
+    // Biến keyword
+    let key = '';
+    //Biến lưu id của setTimeout
+    //Hàm lấy dữ liệu ô tìm kiếm
+    let id;
+    const handleSearch = (e) => {
+        console.log(1)
+        key = e.target.value;
+        clearTimeout(id);
+        //Gọi api mỗi 3 giây để lấy dữ liệu
+        id = setTimeout(() => {
+            callSearchApi();
+        }, 300)
+    }
+    searchDialog.addEventListener('input', handleSearch);
+    // Phần hiển thị kết quả tìm kiếm
+    const dialogBody = document.querySelector('.dialog-body');
+    //Hàm gọi api để lấy dữ liệu
+    const callSearchApi = () => {
+        const apiSearch = `https://otruyenapi.com/v1/api/tim-kiem?keyword=${key}`;
+        renderHome(apiSearch, (dataSearch) => {
+            //Gọi hàm kết quả tìm kiếm và chèn vào trong khối dialogBody
+            dialogBody.innerHTML = searchResult(dataSearch);
+            const chapters = document.querySelectorAll('.chapter');
+            chapters.forEach(chapter => {
+                //Nếu chương nào không có chap thì vô hiệu hóa tương tác
+                chapter.classList.toggle('pointer-events-none',  )
+                //Ngăn chặn sự nổi bọt sự kiện click ra thẻ cha
+                chapter.addEventListener('click', (e)=>{
+                    if(chapter.getAttribute('data-url') == ''){
+                        e.preventDefault();
+                    }
+                })
+            })
+        })
+    }
+    callSearchApi();
+
+})
