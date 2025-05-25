@@ -92,7 +92,7 @@ let handleNav = (chapters) => {
     const dialogBox = document.querySelector('.dialog-box');
     const dialogList = document.querySelector('.dialog-list');
     //Kiểm soát sự kiện click
-    dialogList.addEventListener('mousedown', e =>{
+    dialogList.addEventListener('mousedown', e => {
         e.stopPropagation();
     })
     //Xử lý phần hiển thị khi ấn vào chương
@@ -109,16 +109,47 @@ let handleNav = (chapters) => {
         dialogBox.classList.toggle('active');
         document.body.style.overflowY = 'visible';
     })
-    // Hiển thị tất cả các chương
-    let htmls = '';
-    htmls = chapters.map((chap, index) => {
-        return `<a href="content.html?api=${getIdContent(chap.chapter_api_data)}&slug=${slug}"
+    // Hàm hiển thị tất cả các chương
+    let loadChap = (chapters) => {
+        let htmls = '';
+        htmls = chapters.map((chap, index) => {
+            return `<a href="content.html?api=${getIdContent(chap.chapter_api_data)}&slug=${slug}"
                     class="btn-chapter col-2 btn btn-sm text-white m-2
                     ${index === currentChap ? 'active-chapter' : ''}">
                     ${chap.chapter_name}
                 </a>`
-    }).join('')
-    dialog.innerHTML = htmls;
+        }).join('')
+        return htmls;
+    }
+    dialog.innerHTML = loadChap(chapters);
+    //Xử lý sự kiện tìm kiếm
+    //Khối tìm kiếm
+    const searchContent = document.querySelector('.search-content');
+    //Biến lưu từ khóa
+    let keyContent = '';
+    //Hàm tìm kiếm chương
+    let handleSearchContent = (e) => {
+        keyContent = e.target.value;
+        const btnChapter = Array.from(document.querySelectorAll('.btn-chapter'));
+        // Nếu không nhập gì → hiện tất cả
+        if (keyContent === "") {
+            btnChapter.forEach(btn => btn.classList.remove('disabled'));
+            return;
+        }
+
+        // Tìm nút chính xác
+        let arNew = btnChapter.filter(btn => btn.innerText.trim() === keyContent.trim());
+
+        btnChapter.forEach(btn => {
+            if (arNew.includes(btn)) {
+                btn.classList.remove('disabled');
+            } else {
+                btn.classList.add('disabled');
+            }
+        });
+    }
+
+    searchContent.addEventListener('input', handleSearchContent);
     // Xử lý khi cuộn chuột lên / xuống
 
     const topMovePannel = document.querySelector('.top-move-pannel');
@@ -250,10 +281,10 @@ navSearch.addEventListener('click', () => {
             const chapters = document.querySelectorAll('.chapter');
             chapters.forEach(chapter => {
                 //Nếu chương nào không có chap thì vô hiệu hóa tương tác
-                chapter.classList.toggle('pointer-events-none',  )
+                chapter.classList.toggle('pointer-events-none',)
                 //Ngăn chặn sự nổi bọt sự kiện click ra thẻ cha
-                chapter.addEventListener('click', (e)=>{
-                    if(chapter.getAttribute('data-url') == ''){
+                chapter.addEventListener('click', (e) => {
+                    if (chapter.getAttribute('data-url') == '') {
                         e.preventDefault();
                     }
                 })
