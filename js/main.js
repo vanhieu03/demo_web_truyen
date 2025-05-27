@@ -168,7 +168,6 @@ let handleRenderPagi = (range, totalPages, pageRanges) => {
             render(currentPage);
         })
     })
-
 }
 
 //Lấy các trang truyện để điều hướng

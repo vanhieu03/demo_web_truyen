@@ -40,7 +40,7 @@ let renderChap = (domain, linkImg) => {
     let htmls = '';
     linkImg.forEach(link => {
         htmls += `
-            <img src="${domain}${link.image_file}" alt="anh_loi" class="d-block">
+            <img src="${domain}${link.image_file}" alt="anh_loi" class="d-block w-100">
         `
     })
     return htmls;

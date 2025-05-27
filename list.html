@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/list.css">
     <title>Truyện tranh 14|5|2025</title>
 </head>
 
@@ -16,7 +17,8 @@
             <div class="dialog-header">
                 <div class="dialog-group input-group align-items-center">
                     <input type="text" placeholder="Search" class="search-dialog py-3">
-                    <div class="btn-exit btn btn-sm d-flex justify-content-center align-items-center rounded-circle me-1 py-2">
+                    <div
+                        class="btn-exit btn btn-sm d-flex justify-content-center align-items-center rounded-circle me-1 py-2">
                         <svg viewBox="0 0 24 24" class="v-icon-svg v-icon-svg-dialog">
                             <path
                                 d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z">
@@ -32,7 +34,7 @@
     <div style="background-color: var(--bg-1);">
         <div class="container">
             <div class="row py-2 align-items-center">
-                <div class="col-md-6 d-flex">
+                <div class="col-6 d-flex">
                     <a href="index.html">
                         <img src="https://goctruyentranhvui17.com/contents/images/logo.png" alt="logo" width="120px"
                             height="45px">
@@ -41,13 +43,14 @@
                         <a href="index.html"
                             class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">TRANG
                             CHỦ</a>
-                        <a href="list.html" class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">DANH
+                        <a href="list.html"
+                            class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">DANH
                             SÁCH</a>
                         <!-- <a href="contact.html" class="btn-default text-decoration-none py-2 px-3 mx-2 rounded fw-medium small">LIÊN
                             HỆ</a> -->
                     </div>
                 </div>
-                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <div class="col-6 d-flex justify-content-end align-items-center">
                     <div class="nav-search p-2 me-4 rounded-pill">
                         <svg viewBox="0 0 24 24" class="v-icon-svg v-icon-svg-big" width="30px" style="fill:#fff;">
                             <path
@@ -59,12 +62,47 @@
             </div>
         </div>
     </div>
-    
+    <div class="list py-2">
+        <div class="container">
+            <!-- Phần trên -->
+            <div class="p-2 rounded" style="background-color: var(--bg-btn);">
+                <div class="d-flex py-4 mb-3">
+                    <button class="btnSearch-cate btn border text-white me-2">Tìm kiếm</button>
+                    <input type="text" placeholder="Nhập tên truyện" class="search-list form-control w-auto">
+                </div>
+                <div class="list-category rounded">
+                    <fieldset class="fieldset-cate">
+                        <legend class="legend-cate align-items-center d-inline w-auto">
+                            <span class="text-white small">Thể loại</span>
+                            <svg class="v-icon-svg-cate" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 10l5 5 5-5z"></path>
+                            </svg>
+                        </legend>
+                        <!-- Hiển thị tất cả thể loại truyện -->
+                        <div class="cate-content p-3">
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- Phần dưới -->
+            <div class="content-search my-4">
+                <div class="d-flex align-items-center">
+                    <div class="px-3 text-white fs-5">Nội Dung</div>
+                    <div class="divider"></div>
+                </div>
+                <!-- Thông tin tìm kiếm -->
+                <div class="cate-list"></div>
+                <div class="mx-3">
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="main-footer pt-5 pb-4 ">
-        <div class="footer m-auto">
+        <div class="container-fluid footer m-auto">
             <div class="row align-items-center justify-content-center">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3 mb-md-0">
                     <div class="text-white">Copyright © 2025 - Goc Truyen Tranh</div>
                     <div class="text-white">
                         Email:
@@ -75,7 +113,7 @@
                 <a class="col-md-6" href="https://www.facebook.com/goctruyentranh24h/?ref=embed_page" target="_blank">
                     <div class="d-inline-flex bg-light p-2">
                         <div class="m-2">
-                            <img src="https://scontent.fhan2-5.fna.fbcdn.net/v/t39.30808-1/278246634_351044933708661_1357101858945036765_n.jpg?stp=cp0_dst-jpg_s50x50_tt6&_nc_cat=1&ccb=1-7&_nc_sid=f907e8&_nc_ohc=XHjZKbfYMboQ7kNvwFIk7wu&_nc_oc=AdkP2o0Ya4wrv8uBD0COxUjC4FB1tJ83hABqXWZNLFPd2jx8kzC7OlnLVCRx8YwsO54&_nc_zt=24&_nc_ht=scontent.fhan2-5.fna&_nc_gid=e_ORlJ5uMZryrojEe_x86g&oh=00_AfIPEGqZEbWt75RsLi9HJx0Crs7-Z78RxVqIQI-7N9LCYA&oe=6831DCDF"
+                            <img src="https://scontent.fhph1-2.fna.fbcdn.net/v/t39.30808-1/278246634_351044933708661_1357101858945036765_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=1&ccb=1-7&_nc_sid=f907e8&_nc_ohc=x-AHbWmNZ_gQ7kNvwETGCjZ&_nc_oc=AdmetcD25L-22Mc5efV7VyW1l0MMzRrv-qLbyqmGkgoW9_PJWH_-CEc6v7ArscHTc3QWoJahdOQzcIJgpCox-DZo&_nc_zt=24&_nc_ht=scontent.fhph1-2.fna&edm=ALIZrNsEAAAA&_nc_gid=x0nV9I79R4vuxzj4cxcfFw&oh=00_AfIntc-r2ukUmxn5bAorYV9v5sS30y9730QZvrvHOpZ56w&oe=683B4F9F"
                                 height="50px" width="50px" alt="anh_loi">
                         </div>
                         <div class="small">
@@ -98,7 +136,7 @@
     <script>
         const links = document.querySelectorAll('.btn-default');
 
-        links.forEach((link,index) => {
+        links.forEach((link, index) => {
             // Lấy pathname của link (vd: "index.html")
             const linkPath = link.getAttribute('href');
             // So sánh với pathname hiện tại
@@ -109,6 +147,7 @@
     </script>
 
     <script src="./bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="./js/list.js"></script>
 </body>
+
 </html>
